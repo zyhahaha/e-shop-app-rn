@@ -12,27 +12,72 @@
 // export default App;
 
 import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import {
-  Button,
-  Text,
-  Alert
-} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {View, Button, Text, Alert, StyleSheet} from 'react-native';
 
-const HomeScreen = ({ navigation }) => {
+const styles = StyleSheet.create({
+  disFlex: {
+    display: 'flex',
+  },
+  flexOne: {
+    flex: 1,
+  },
+  sectionTitle: {
+    fontSize: 24,
+    fontWeight: '600',
+  },
+  sectionDescription: {
+    marginTop: 8,
+    fontSize: 18,
+    fontWeight: '400',
+  },
+  highlight: {
+    fontWeight: '700',
+  },
+});
+
+const TabBar = ({navigation}) => {
   return (
-    <Button
-      title="Go to Jane's profile Page"
-      onPress={() =>
-        {
-          navigation.navigate('Profile', { name: 'Jane' });
-        }
-      }
-    />
+    <View style={styles.disFlex}>
+      <Button
+        style={styles.flexOne}
+        title="Home"
+        onPress={() => {
+          navigation.navigate('Profile', {name: 'Jane'});
+        }}
+      />
+      <Button
+        style={styles.flexOne}
+        title="Home"
+        onPress={() => {
+          navigation.navigate('Profile', {name: 'Jane'});
+        }}
+      />
+      <Button
+        style={styles.flexOne}
+        title="Home"
+        onPress={() => {
+          navigation.navigate('Profile', {name: 'Jane'});
+        }}
+      />
+    </View>
   );
 };
-const ProfileScreen = ({ navigation, route }) => {
+const HomeScreen = ({navigation}) => {
+  return (
+    <TabBar navigation={undefined} />
+    // <Button
+    //   title="Go to Jane's profile Page"
+    //   onPress={() =>
+    //     {
+    //       navigation.navigate('Profile', { name: 'Jane' });
+    //     }
+    //   }
+    // />
+  );
+};
+const ProfileScreen = ({navigation, route}) => {
   return <Text>This is {route.params.name}'s profile</Text>;
 };
 
@@ -45,7 +90,7 @@ const App = () => {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{ title: 'Welcome', headerShown: false }}
+          options={{title: 'Welcome', headerShown: false}}
         />
         <Stack.Screen name="Profile" component={ProfileScreen} />
       </Stack.Navigator>
